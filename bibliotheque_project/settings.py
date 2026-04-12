@@ -10,13 +10,8 @@ SECRET_KEY = os.environ.get(
     'django-insecure-r$-z2jkzq%@_c!uq8w7$utz29^us6ju!5h#_t+^$*v#_k!*m)w'
 )
 
-DEBUG = True
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '.railway.app',
-    '.up.railway.app',
-]
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -60,7 +55,7 @@ WSGI_APPLICATION = 'bibliotheque_project.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        default=os.environ.get('DATABASE_URL'),
         conn_max_age=600,
         conn_health_checks=True,
     )
